@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:                               # Labels assigned at set level
+    app: guestbook
+    tier: frontend
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:                          # Labels assigned at pod level
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:mainline-alpine-slim
+        ports:
+        - containerPort: 80
